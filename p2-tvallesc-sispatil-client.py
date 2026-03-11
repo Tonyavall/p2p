@@ -221,6 +221,10 @@ def wait_loop():
 def enter_wait():
     global listen_sock, state
 
+    if client_port == server_port:
+        print('port conflict with server', file=sys.stderr)
+        sys.exit(1)
+        
     try:
         listen_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         listen_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
